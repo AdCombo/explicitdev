@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pipenv-setup = "*"
+pytest = "*"
+coverage = "*"
+
+[packages]
+jira="*"
+sqlalchemy="*"
+attrs="*"
+psycopg2 = "*"
+click = "*"
+pytz = "*"
+
+[requires]
+python_version = "3.6"
