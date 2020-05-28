@@ -9,16 +9,18 @@ from explicitdev.fetch.jira import FetchJiraData
 from explicitdev.storage.factory.abstract import ModelBulkInsertUpdate, DataDict
 from explicitdev.storage.model.issue import IssueAttrs
 from explicitdev.storage.session import Session
+from explicitdev.storage.update.abstract import AbstractUpdate
 
 
-class UpdateJira:
+class UpdateJira(AbstractUpdate):
     """It works only when Issue attribute same as key from dict"""
 
-    def __init__(self, c: Config):
-        self.c = c
+    def __init__(self, c):
+        super().__init__(c)
         self.factory_issue = c.Models.Issue.Factory(c)
         self.factory_history = c.Models.FactoryHistory(c)
         self.Issue = c.Models.Issue.Class
+        self.models_with_containers = self.c.Models.models_with_containers
 
     def _max_updated_issue(self, session: Session) -> int:
         result = session.query(
@@ -28,22 +30,10 @@ class UpdateJira:
         result = int(result.timestamp()) * 1000
         return result
 
-    @staticmethod
-    def _bulk_update_insert_mappings(session: Session, data: DataDict):
-        for name, container in data.items():
-            logging.info('Going to insert %s %s into DB', len(container.insert), name)
-            session.bulk_insert_mappings(container.model, container.insert)
-            # For avoid different problems simply always override all fields in all entities.
-            logging.info('Going to update %s %s in DB', len(container.update), name)
-            session.bulk_update_mappings(container.model, container.update)
-            session.flush()
-            container.update = list()
-            container.insert = list()
-
     def _create_data_containers_dict(self):
         """Create containers for transport data between code."""
         data = dict()
-        for model in self.c.Models.models_with_containers:
+        for model in self.models_with_containers:
             data[model.__name__] = ModelBulkInsertUpdate(model=model)
         return data
 

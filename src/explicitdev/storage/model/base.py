@@ -1,7 +1,5 @@
-from sqlalchemy import (
-    Column,
-    Integer,
-)
+from typing import Tuple, Type
+
 from sqlalchemy.ext.declarative import (
     declarative_base,
     declared_attr,
@@ -15,3 +13,5 @@ class Base:
 
 
 Base = declarative_base(cls=Base)
+
+ModelContainerTypeTuple = Tuple[Type[Base]]

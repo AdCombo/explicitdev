@@ -102,6 +102,12 @@
           "votes": 0,
           "hasVoted": false
         },
+        "worklog": {
+          "startAt": 0,
+          "maxResults": 20,
+          "total": 0,
+          "worklogs": []
+        },
         "issuetype": {
           "self": "https://jira.example.com/rest/api/2/issuetype/10000",
           "id": "10000",
@@ -137,9 +143,17 @@
         "updated": "2020-05-09T18:20:39.000+0000",
         "timeoriginalestimate": null,
         "description": "My new epic",
+        "timetracking": {},
+        "attachment": [],
         "summary": "Test epic",
         "environment": null,
-        "duedate": null
+        "duedate": null,
+        "comment": {
+          "comments": [],
+          "maxResults": 0,
+          "total": 0,
+          "startAt": 0
+        }
       },
       "changelog": {
         "startAt": 0,
@@ -411,6 +425,54 @@
           "votes": 0,
           "hasVoted": false
         },
+        "worklog": {
+          "startAt": 0,
+          "maxResults": 20,
+          "total": 1,
+          "worklogs": [
+            {
+              "self": "https://jira.example.com/rest/api/2/issue/40889/worklog/14957",
+              "author": {
+                "self": "https://jira.example.com/rest/api/2/user?username=sergey",
+                "name": "sergey",
+                "key": "sergey",
+                "emailAddress": "chernyaksergey@gmail.com",
+                "avatarUrls": {
+                  "48x48": "https://jira.example.com/secure/useravatar?ownerId=sergey&avatarId=12900",
+                  "24x24": "https://jira.example.com/secure/useravatar?size=small&ownerId=sergey&avatarId=12900",
+                  "16x16": "https://jira.example.com/secure/useravatar?size=xsmall&ownerId=sergey&avatarId=12900",
+                  "32x32": "https://jira.example.com/secure/useravatar?size=medium&ownerId=sergey&avatarId=12900"
+                },
+                "displayName": "Sergey Chernyak",
+                "active": true,
+                "timeZone": "Europe/Moscow"
+              },
+              "updateAuthor": {
+                "self": "https://jira.example.com/rest/api/2/user?username=sergey",
+                "name": "sergey",
+                "key": "sergey",
+                "emailAddress": "chernyaksergey@gmail.com",
+                "avatarUrls": {
+                  "48x48": "https://jira.example.com/secure/useravatar?ownerId=sergey&avatarId=12900",
+                  "24x24": "https://jira.example.com/secure/useravatar?size=small&ownerId=sergey&avatarId=12900",
+                  "16x16": "https://jira.example.com/secure/useravatar?size=xsmall&ownerId=sergey&avatarId=12900",
+                  "32x32": "https://jira.example.com/secure/useravatar?size=medium&ownerId=sergey&avatarId=12900"
+                },
+                "displayName": "Sergey Chernyak",
+                "active": true,
+                "timeZone": "Europe/Moscow"
+              },
+              "comment": "Testing log",
+              "created": "2020-05-09T18:33:49.407+0000",
+              "updated": "2020-05-09T18:33:49.407+0000",
+              "started": "2020-05-09T18:33:00.000+0000",
+              "timeSpent": "1d 2h",
+              "timeSpentSeconds": 36000,
+              "id": "14957",
+              "issueId": "40889"
+            }
+          ]
+        },
         "issuetype": {
           "self": "https://jira.example.com/rest/api/2/issuetype/10001",
           "id": "10001",
@@ -446,9 +508,62 @@
         "updated": "2020-05-09T18:39:11.000+0000",
         "timeoriginalestimate": 763200,
         "description": "Test-2 Issue",
+        "timetracking": {
+          "originalEstimate": "5w 1d 4h",
+          "remainingEstimate": "2d 2h",
+          "timeSpent": "1d 2h",
+          "originalEstimateSeconds": 763200,
+          "remainingEstimateSeconds": 64800,
+          "timeSpentSeconds": 36000
+        },
+        "attachment": [],
         "summary": "Test-2",
         "environment": null,
-        "duedate": "2020-05-22"
+        "duedate": "2020-05-22",
+        "comment": {
+          "comments": [
+            {
+              "self": "https://jira.example.com/rest/api/2/issue/40889/comment/46473",
+              "id": "46473",
+              "author": {
+                "self": "https://jira.example.com/rest/api/2/user?username=sergey",
+                "name": "sergey",
+                "key": "sergey",
+                "emailAddress": "chernyaksergey@gmail.com",
+                "avatarUrls": {
+                  "48x48": "https://jira.example.com/secure/useravatar?ownerId=sergey&avatarId=12900",
+                  "24x24": "https://jira.example.com/secure/useravatar?size=small&ownerId=sergey&avatarId=12900",
+                  "16x16": "https://jira.example.com/secure/useravatar?size=xsmall&ownerId=sergey&avatarId=12900",
+                  "32x32": "https://jira.example.com/secure/useravatar?size=medium&ownerId=sergey&avatarId=12900"
+                },
+                "displayName": "Sergey Chernyak",
+                "active": true,
+                "timeZone": "Europe/Moscow"
+              },
+              "body": "Test issue commment",
+              "updateAuthor": {
+                "self": "https://jira.example.com/rest/api/2/user?username=sergey",
+                "name": "sergey",
+                "key": "sergey",
+                "emailAddress": "chernyaksergey@gmail.com",
+                "avatarUrls": {
+                  "48x48": "https://jira.example.com/secure/useravatar?ownerId=sergey&avatarId=12900",
+                  "24x24": "https://jira.example.com/secure/useravatar?size=small&ownerId=sergey&avatarId=12900",
+                  "16x16": "https://jira.example.com/secure/useravatar?size=xsmall&ownerId=sergey&avatarId=12900",
+                  "32x32": "https://jira.example.com/secure/useravatar?size=medium&ownerId=sergey&avatarId=12900"
+                },
+                "displayName": "Sergey Chernyak",
+                "active": true,
+                "timeZone": "Europe/Moscow"
+              },
+              "created": "2020-05-09T18:35:42.467+0000",
+              "updated": "2020-05-09T18:35:42.467+0000"
+            }
+          ],
+          "maxResults": 1,
+          "total": 1,
+          "startAt": 0
+        }
       },
       "changelog": {
         "startAt": 0,
@@ -815,6 +930,12 @@
           "votes": 0,
           "hasVoted": false
         },
+        "worklog": {
+          "startAt": 0,
+          "maxResults": 20,
+          "total": 0,
+          "worklogs": []
+        },
         "issuetype": {
           "self": "https://jira.example.com/rest/api/2/issuetype/1",
           "id": "1",
@@ -850,9 +971,17 @@
         "updated": "2020-05-09T18:24:07.000+0000",
         "timeoriginalestimate": null,
         "description": "Test-1 Issue",
+        "timetracking": {},
+        "attachment": [],
         "summary": "Test",
         "environment": null,
-        "duedate": null
+        "duedate": null,
+        "comment": {
+          "comments": [],
+          "maxResults": 0,
+          "total": 0,
+          "startAt": 0
+        }
       },
       "changelog": {
         "startAt": 0,

@@ -22,7 +22,7 @@ def main():
     pass
 
 
-@click.command()
+@main.command()
 def dump():
     fetcher = FetchJiraData(Config)
     data = fetcher.fetch_data()

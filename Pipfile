@@ -15,6 +15,7 @@ attrs="*"
 psycopg2 = "*"
 click = "*"
 pytz = "*"
+gspread = "*"
 
 [requires]
 python_version = "3.6"

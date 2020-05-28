@@ -1,11 +1,11 @@
 import json
 import logging
 import time
-from pathlib import Path
 from typing import Type
 
 import attr
 from jira import JIRA
+
 from explicitdev.config import Config
 
 
@@ -15,9 +15,13 @@ class JiraSearchParams:
     """Actually JQL request"""
     maxResults: int = 50
     json_result: bool = True
+    """Set it to true. For getting dict. It fobidden from usinc acync mode in client. Work issues another way or 
+    forget """
     expand: str = 'changelog'
     """Expand with changelog for getting all changes"""
     startAt: int = 0
+    fields: str = '*all'
+    """To get all fields from issues with comments and worklog"""
 
 
 @attr.s(auto_attribs=True)
@@ -41,7 +45,7 @@ class FetchJiraData:
     """Template for JQL requst for getting issues from Jira"""
 
     def __init__(self, c: Type[Config]):
-        self._dump_path = Path(c.DumpFiles.PATH).joinpath(c.DumpFiles.FILENAME)
+        self._dump_path = c.DataFiles.PATH.joinpath(c.DataFiles.ISSUE_DUMPS)
         """Path for file where to put dump from issues and get data from. Useful for development."""
         self.c: Config = c
 

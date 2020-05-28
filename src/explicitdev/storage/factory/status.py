@@ -24,15 +24,15 @@ class FactoryStatus(FactoryAbstract):
         super().__init__(c)
         self.Status = c.Models.Status.Class
 
-    def get_existed_entities(self, session: Session):
-        existed_entites = dict()
-        # todo write correct type for this
-        query = session.query(
-            self.Status.id,
-            self.Status.issue_key,
-            self.Status.start_ts,
-            self.Status.status,
+    def get_existed_entities(self, session: Session, **kwargs):
+        # noinspection PyTypeChecker
+        result = super().get_existed_entities(
+            session=session,
+            model=self.Status,
+            columns=(
+                SA.issue_key,
+                SA.start_ts,
+                SA.status,
+            ),
         )
-        for row in query:
-            existed_entites[(row.issue_key, row.start_ts, row.status)] = row.id
-        self.existed_entities = existed_entites
+        return result

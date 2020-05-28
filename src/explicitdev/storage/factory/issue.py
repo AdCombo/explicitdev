@@ -60,14 +60,11 @@ class FactoryIssue(FactoryAbstract):
 
         return result_dict
 
-    def get_existed_entities(self, session: Session) -> set:
-        result_dict = dict()
-        result = session.query(
-            func.coalesce(
-                func.array_agg(self.Issue.key), []
-            )
-        ).scalar()
-        for key in result:
-            result_dict[key] = key
-        self.existed_entities = result_dict
+    def get_existed_entities(self, session, **kwargs):
+        result = super().get_existed_entities(
+            session=session,
+            model=self.Issue,
+            columns=(IssueAttrs.key,),
+            id_field=IssueAttrs.key,
+        )
         return result

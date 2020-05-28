@@ -15,8 +15,16 @@ setup(
     url="https://github.com/onyxim/explicitdev",
     packages=find_packages("src"),
     package_dir={"": "src"},
-    install_requires=["jira", "sqlalchemy", "attrs", "psycopg2", "click", "pytz"],
-    extras_require={"dev": ["pipenv-setup", "pytest", "coverage", ], },
+    install_requires=[
+        "jira",
+        "sqlalchemy",
+        "attrs",
+        "psycopg2",
+        "click",
+        "pytz",
+        "gspread",
+    ],
+    extras_require={"dev": ["pipenv-setup", "pytest", "coverage",],},
     include_package_data=True,
     license="Apache License 2.0",
     classifiers=[

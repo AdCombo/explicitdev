@@ -2,7 +2,7 @@
 
 1. fix test for fetch method
 1. Take a care for a Config annotation. Why it wrong?
-1. loading status into DB
+1. add value to update by comments date
 
 # wanna
 1. move patch to separate python package
