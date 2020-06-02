@@ -5,22 +5,25 @@ from typing import (
 
 import gspread
 import pytz
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
 from explicitdev.analyse.jira import JiraAnalyzer
 from explicitdev.storage.factory import (
     FactoryIssue,
     FactoryStatus,
     FactoryHistory,
     FactoryUser,
+    FactoryHoliday,
 )
 from explicitdev.storage.model import (
     Issue as AlchemyIssue,
     User as AlchemyUser,
     Status as AlchemyStatus,
+    Holiday as AlchemyHoliday,
 )
 from explicitdev.storage.session import session_scope
 from explicitdev.utils.const import ReportSaveModes
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
 if TYPE_CHECKING:
     from explicitdev.storage.model.base import ModelContainerTypeTuple
@@ -37,6 +40,7 @@ class Config:
         PATH: Path = None
         """Folder to store different data files as source and target for dump"""
         ISSUE_DUMPS: str = "issue_dumps.json"
+        HOLIDAYS: str = "holidays.csv"
 
     class Models:
         class Issue:
@@ -50,6 +54,10 @@ class Config:
         class User:
             Class = AlchemyUser
             Factory = FactoryUser
+
+        class Holiday:
+            Class = AlchemyHoliday
+            Factory = FactoryHoliday
 
         FactoryHistory = FactoryHistory
         models_with_containers: 'ModelContainerTypeTuple' = (Issue.Class, Status.Class)

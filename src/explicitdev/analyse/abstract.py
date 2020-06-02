@@ -46,7 +46,7 @@ class AbstractAnalyzer(AbstractWithConfig):
         rows = list(self._get_rows_from_query(query))
         new_rows_count = len(rows)
         logging.info('Going to upload %s rows into %s report', new_rows_count, class_name)
-        work_sheet.append_rows(
+        work_sheet.insert_rows(
             rows,
         )
         logging.info('Upload data to %s completed', class_name)

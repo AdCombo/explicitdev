@@ -6,6 +6,7 @@ from explicitdev.config import Config
 from explicitdev.fetch.jira import FetchJiraData
 from explicitdev.storage.model.base import Base
 from explicitdev.storage.update import UpdateJira
+from explicitdev.storage.update.holiday import UpdateHolidayCSV
 
 
 def drop_and_create_all():
@@ -46,6 +47,15 @@ def sync(drop_db):
     if drop_db:
         drop_and_create_all()
     UpdateJira(Config).sync()
+
+@main.command()
+@click.option('--drop_db', is_flag=True)
+def sync_holiday(drop_db):
+    updater = UpdateHolidayCSV(Config)
+    # todo delete copypaste and merge it with load
+    if drop_db:
+        updater.drop_create_tables()
+    updater.sync()
 
 
 def _analyze():
