@@ -1,5 +1,7 @@
 import logging
-from typing import Type, TYPE_CHECKING
+from typing import TYPE_CHECKING, Tuple
+
+from sqlalchemy.orm import Session
 
 from explicitdev.utils.abstract import AbstractWithConfig
 from explicitdev.utils.const import ReportSaveModes
@@ -10,6 +12,8 @@ if TYPE_CHECKING:
 
 
 class AbstractAnalyzer(AbstractWithConfig):
+    CONVERT_ROWS: Tuple[tuple] = ()
+    """Rows needed to be converted during serialisation"""
 
     def __init__(self, c: 'Config', *args, **kwargs):
         super().__init__(c, *args, **kwargs)
@@ -22,19 +26,27 @@ class AbstractAnalyzer(AbstractWithConfig):
         """Method for actually getting and saving report"""
         pass
 
+    def prepare_query(self, session: Session):
+        """Prepare SQL request for a report"""
+        pass
+
     def _save_results_to_csv(self, results_query, report_name: str, **kwargs):
         report_path = self.c.Reports.dir.joinpath(report_name)
         save_alchemy_query_to_csv(results_query, report_path, **kwargs)
 
-    @staticmethod
-    def _get_rows_from_query(query):
+    def _prepare_row(self, row: dict) -> tuple:
+        for key, f in self.CONVERT_ROWS:
+            row[key] = f(row[key])
+        return tuple(row.values())
+
+    def _get_rows_from_query(self, query):
         first_row = True
         for row in query:
             if first_row:
                 # возвражаещ заголовки
                 yield tuple(row._asdict().keys())
                 first_row = False
-            yield tuple(row)
+            yield self._prepare_row(row._asdict())
 
     def _update_gspread(self, query):
         class_name = self.Report.__name__
@@ -46,7 +58,7 @@ class AbstractAnalyzer(AbstractWithConfig):
         rows = list(self._get_rows_from_query(query))
         new_rows_count = len(rows)
         logging.info('Going to upload %s rows into %s report', new_rows_count, class_name)
-        work_sheet.insert_rows(
+        work_sheet.append_rows(
             rows,
         )
         logging.info('Upload data to %s completed', class_name)

@@ -81,6 +81,9 @@ class Config:
             gspread_worksheet_name: str = 'data'
             """Name of a worksheet to save data"""
 
+        class StatusesDuration(AbstractReport):
+            description = 'Calculate statuses duration with production calendar.'
+
         class UserBeginPerformance(AbstractReport):
             description = 'Report for measure developers productivity from beginning of the work'
 

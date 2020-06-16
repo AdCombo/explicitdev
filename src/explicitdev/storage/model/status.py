@@ -22,6 +22,7 @@ class Status(Base):
     author = Column(String, index=True)
     status = Column(String, index=True, nullable=False)
     start_ts = Column(TIMESTAMP(timezone=True), index=True, nullable=False)
+    # todo make constraint to forbid it be lesser than start_ts
     end_ts = Column(TIMESTAMP(timezone=True), index=True)
 
     __table_args__ = (

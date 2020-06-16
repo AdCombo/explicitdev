@@ -11,7 +11,7 @@ services:
 
   pg:
     <<: *logs_template
-    image: postgres:9.6
+    image: postgres:12.3
     environment:
       - POSTGRES_USER=test
       - POSTGRES_PASSWORD=test

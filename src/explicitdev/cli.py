@@ -34,6 +34,7 @@ def dump():
 @click.option('--drop_db', is_flag=True)
 def load(drop_db):
     if drop_db:
+        # todo drop only needed tables not all
         drop_and_create_all()
     fetcher = FetchJiraData(Config)
     data = fetcher.load_data()
