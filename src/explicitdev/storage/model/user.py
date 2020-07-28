@@ -39,7 +39,12 @@ class User(Base):
     )
     working_start_date = Column(
         Date,
-        comment='Date when user begin to work in company.',
+        comment='Date when user begin to work in the company.',
+        index=True,
+    )
+    working_end_date = Column(
+        Date,
+        comment='Date when user stop to work in the company.',
         index=True,
     )
 
