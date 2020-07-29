@@ -87,6 +87,9 @@ class Config:
         class UserBeginPerformance(AbstractReport):
             description = 'Report for measure developers productivity from beginning of the work'
 
+        class TermOfWork(AbstractReport):
+            description = 'Measure mean and median term of work during periods.'
+
     DB_CONN_STRING: str = 'postgresql://test:test@127.0.0.1:5433/test'
     engine = create_engine(DB_CONN_STRING)
     CHUNK_DB_SIZE: int = 1000

@@ -47,6 +47,11 @@ class User(Base):
         comment='Date when user stop to work in the company.',
         index=True,
     )
+    status = Column(
+        String,
+        comment='Current status of a user.',
+        index=True,
+    )
 
 
 class UserAttrs(User, metaclass=AutoNamedModelAttrs):
